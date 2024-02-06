@@ -1,0 +1,20 @@
+distributable:
+  url: https://github.com/martinvonz/jj/archive/refs/tags/v{{ version }}.tar.gz
+  strip-components: 1
+
+provides:
+  - bin/jj
+
+versions:
+  github: martinvonz/jj/tags
+  strip: /v/
+
+build:
+  dependencies:
+    freedesktop.org/pkg-config: '*'
+    openssl.org: '*'
+    rust-lang.org: ">=1.71"
+    rust-lang.org/cargo: "*"
+  script: cargo install --locked --path ./cli --root {{prefix}} --bin jj
+
+test: jj --version
